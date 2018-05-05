@@ -22,7 +22,7 @@
       float: right;
     }
 		div#board {
-			background: #f4a142;
+			background: #228B22;
 			width: 880px;
 			height: 880px;
 			padding: 10px;
@@ -58,7 +58,8 @@
     function flip(card, value) {
       if (flipped < 2) {
         if (value == value.toUpperCase()) {
-          card.innerHTML = value
+          var fileString = 'CardFacesLetters/letter_'+value.toUpperCase()+'.png'
+          card.style.backgroundImage = "url("+fileString+")";
         } else {
           var fileString = 'CardFaces/asl_'+value.toUpperCase()+'.png'
           card.style.backgroundImage = "url("+fileString+")";
@@ -81,24 +82,29 @@
             if (totalMatches == 8) {
               // gameover
               totalMatches = 0;
+              document.getElementById("score").innerHTML = "Score: "+totalMatches;
               document.getElementById("board").innerHTML = "";
               init();
             }
 
           } else {
-            var card1 = document.getElementById(cardIds[cardIds.length - 2]);
-            var card2 = document.getElementById(cardIds[cardIds.length - 1]);
-            // make slower
-            cardsFlipped = [];
-            cardsIds = [];
-            flipped = 0;
-            card1.style.backgroundImage = 'url(Card.png)';
-            card1.innerHTML = "";
-            card2.style.backgroundImage = 'url(Card.png)';
-            card2.innerHTML = "";
+            setTimeout(flipBack, 500);
           }
         }
       }
+    }
+
+    function flipBack() {
+      var card1 = document.getElementById(cardIds[cardIds.length - 2]);
+      var card2 = document.getElementById(cardIds[cardIds.length - 1]);
+      // make slower
+      cardsFlipped = [];
+      cardsIds = [];
+      flipped = 0;
+      card1.style.backgroundImage = 'url(Card.png)';
+      card1.innerHTML = "";
+      card2.style.backgroundImage = 'url(Card.png)';
+      card2.innerHTML = "";
     }
     
   </script>
