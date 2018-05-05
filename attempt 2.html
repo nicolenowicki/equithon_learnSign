@@ -19,7 +19,7 @@
 	</style>
 
   <script>
-    var cardValues = ['1', '2', '3', '4'];
+    var cardValues = ['A', 'B', 'I', 'N', 'P', 'R', 'X', 'Y', 'A', 'B', 'I', 'N', 'P', 'R', 'X', 'Y'];
     var cardsFlipped = [];
     var cardIds = [];
     var flipped = 0; 
@@ -39,7 +39,9 @@
     function flip(card, value) {
       if (flipped == 2) {
         if (card.innerHTML == "" && flipped < 2) {
-          // change image
+          card.innerHTML = value
+          card.background-image = url('asl_'+value+'.png')
+
           cardsFlipped.push(value);
           cardIds.push(card.id);
           
@@ -58,17 +60,14 @@
             }
           }
         } else {
-          flipBack();
+          card.innerHTML = ''
+          card.background-image = url('Card.png');
+          cardsFlipped = [];
+          cardIds = [];
+          flipped = 0;
+          setTimeout(flipBack, 700);
         }
       }
-    }
-    
-    function flipBack() {
-      // flip back
-      cardsFlipped = [];
-      cardIds = [];
-      flipped = 0;
-      setTimeout(flipBack, 700);
     }
     
   </script>
