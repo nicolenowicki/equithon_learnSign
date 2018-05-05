@@ -4,8 +4,8 @@
   <style type="text/css">
 		div#board {
 			background: #f4a142;
-			width: 890px;
-			height: 890px;
+			width: 880px;
+			height: 880px;
 			padding: 10px;
 			margin: 0px auto;
 		}
@@ -29,43 +29,51 @@
 
     function init(){
       flipped = 0;
-    var output = '';
-    for(var i = 0; i < cardValues.length; i++){
-      output += '<div id="tile_'+i+'" onclick="flip(this,\''+cardValues[i]+'\')"></div>';
-    }
-    document.getElementById('board').innerHTML = output;
+      var output = '';
+      for(var i = 0; i < cardValues.length; i++){
+        output += '<div id="tile_'+i+'" onclick="flip(this,\''+cardValues[i]+'\')"></div>';
+      }
+      document.getElementById('board').innerHTML = output;
     }
     
     function flip(card, value) {
-      if (flipped == 2) {
-        if (card.innerHTML == "" && flipped < 2) {
-          card.innerHTML = value
-          card.background-image = url('asl_'+value+'.png')
+      if (flipped < 2) {
+        //card.innerHTML = value
+        var fileString = 'CardFaces/asl_'+value+'.png'
+        card.style.backgroundImage = "url("+fileString+")";
+          
+        cardsFlipped.push(value);
+        cardIds.push(card.id);
+          
+        flipped++;
+          
+        if (flipped == 2) {
+          if (cardsFlipped[0].innerHTML == cardsFlipped[1].innerHTML) {              
+            cardsFlipped = [];
+            cardsIds = [];
+            flipped = 0;
+            totalMatches++;
 
-          cardsFlipped.push(value);
-          cardIds.push(card.id);
-          
-          flipped++;
-          
-          if (flipped == 2) {
-            if (cardsFlipped[0] == cardsFlipped[1]) {
-              cardsFlipped = [];
-              cardsIds = [];
-              flipped = 0;
-              totalMatches++;
-            }
             if (totalMatches == 8) {
               document.getElementById("board").innerHTML = "";
               init();
             }
+
+          } else {
+             function flipBack() {
+               var card1 = document.getElementById(cardIds[0]);
+               var card2 = document.getElementById(cardIds[1]);
+               card1.style.backgroundImage = 'url(Card.png)';
+               card1.innerHTML = "";
+               card2.style.backgroundImage = 'url(Card.png)';
+               card2.innerHTML = "";
+
+               cardsFlipped = [];
+               cardIds = [];
+               flipped = 0;
+            }
+            setTimeout(flipBack, 700);
           }
-        } else {
-          card.innerHTML = ''
-          card.background-image = url('Card.png');
-          cardsFlipped = [];
-          cardIds = [];
-          flipped = 0;
-          setTimeout(flipBack, 700);
         }
       }
     }
