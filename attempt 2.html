@@ -2,6 +2,25 @@
 <html>
 <head>
   <style type="text/css">
+  div#gameHeader {
+      width: 880px;
+      height: 70px;
+      padding: 10px;
+      margin: 0px auto;
+    }
+    div#title {
+      font-size: 50px;
+      float: left;
+      width: 600px;
+      height: 70px;
+    }
+    div#score {
+      width: 200px;
+      height: 70px;
+      margin: 10px;
+      font-size: 25px;
+      float: right;
+    }
 		div#board {
 			background: #f4a142;
 			width: 880px;
@@ -20,14 +39,13 @@
 
   <script>
     var cardValues = ['A', 'B', 'I', 'N', 'P', 'R', 'X', 'Y', 'a', 'b', 'i', 'n', 'p', 'r', 'x', 'y'];
+    // write function to randomize this
     
     var cardIds = [];
     var cardsFlipped = [];
 
     var flipped = 0; 
     var totalMatches = 0;
-    
-    // add shuffle method
 
     function init(){
       var output = '';
@@ -49,11 +67,13 @@
         cardsFlipped.push(value.toUpperCase());
         cardIds.push(card.id);
           
-        flipped++;
+        flipped += 1;
           
         if (flipped == 2) {
           if (cardsFlipped[0] == cardsFlipped[1]) {              
             totalMatches++;
+            document.getElementById("score").innerHTML = "Score: "+totalMatches;
+
             cardsFlipped = [];
             cardsIds = [];
             flipped = 0;
@@ -66,8 +86,9 @@
             }
 
           } else {
-            var card1 = document.getElementById(cardIds[0]);
-            var card2 = document.getElementById(cardIds[1]);
+            var card1 = document.getElementById(cardIds[cardIds.length - 2]);
+            var card2 = document.getElementById(cardIds[cardIds.length - 1]);
+            // make slower
             cardsFlipped = [];
             cardsIds = [];
             flipped = 0;
@@ -83,6 +104,11 @@
   </script>
 </head>
 <body>
+  <div id="gameHeader">
+    <div id="title">ASL MATCH GAME</div>
+    <div id="score">Score: 0</div>
+  </div>
+
 	<div id="board"></div>
 	<script>init();</script>
 </body>
