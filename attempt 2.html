@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+		div#board {
+			background: #f4a142;
+			width:1620px;
+			height: 1620px;
+			padding: 10px;
+			margin: 0px auto;
+		}
+		div#board > div {
+			width: 400px;
+			height: 400px;
+			background-image: url('Card.png');
+			float: left;
+			padding: 20px;
+			margin: 10px;
+			border: #000 1px solid;
+		}
+	</style>
+	
+<script>
+  var cardValues = ['1', '2', '3', '4'];
+  var cardsFlipped = [];
+  var cardIds = [];
+  var flipped = 0; 
+  var totalMatches = 0;
+  
+	// add shuffle method
+
+  function init(){
+    flipped = 0;
+	var output = '';
+	for(var i = 0; i < cardValues.length; i++){
+		output += '<div id="tile_'+i+'" onclick="flip(this,\''+cardValues[i]+'\')"></div>';
+	}
+	document.getElementById('board').innerHTML = output;
+  }
+  
+  function flip(card, value) {
+    if flipped == 2 {
+      if card.innerHTML == "" && flipped < 2 {
+        // change image
+        cardsFlipped.push(value);
+        cardIds.push(card.id);
+        
+        flipped++;
+        
+        if flipped == 2 {
+          if cardsFlipped[0] == cardsFlipped[1] {
+            cardsFlipped = [];
+            cardsIds = [];
+            flipped = 0;
+            totalMatches++;
+          }
+          if totalMatches == 8 {
+            document.getElementById("board").innerHTML = "";
+            init();
+          }
+        }
+      } else {
+        flipBack();
+      }
+    }
+  }
+  
+  function flipBack() {
+    // flip back
+    cardsFlipped = [];
+    cardIds = [];
+    flipped = 0;
+    setTimeout(flipBack, 700);
+  }
+  
+</script>
+</head>
+<body>
+	<div id="board"></div>
+	<script>init();</script>
+</body>
+</html>
