@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Image to use:</p>
+<img id="scream" src="img_the_scream.jpg" alt="The Scream" width="220" height="277">
+
+<p>Canvas to fill:</p>
+<canvas id="myCanvas" width="500" height="300"
+style="border:1px solid #d3d3d3;">
+
+<script>
+function myCanvas() {
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("scream"); // our list of images instead
+    ctx.drawImage(img,10,10); // for loop through images and place them
+}
+</script>
+
+</body>
+</html>
