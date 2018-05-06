@@ -2,28 +2,54 @@
 <html>
 <head>
     <title> ASL Quiz</title>
+    <style type="text/css">
+    h1 {
+        text-align: center;
+    }
+
+    th {
+        background-color: #33af41;
+    }
+    h3 {
+        color: white;
+    }
+
+    td img {
+        align-self: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 5px;
+    }
+
+    
+    </style>
     <script type="text/javascript">
         var questionNumber = document.getElementsByTagName("div").length;
         var totalQuestions = 0
         var correctAnswers = 0
 
-        function CheckQuestion(usr, rslt, ans) {
+        function CheckQuestion(usr, rslt, ans, btn) {
             var x = document.getElementById(usr).value;
             if (x.toUpperCase() == ans){
-                txt = "Your answer is correct! :)";
+                txt = "<b>Result</b>: Your answer is correct! :)";
                 correctAnswers++;
             }
             else {
-                txt = "Your answer is wrong! :(";
+                txt = "<b>Result</b>: Your answer is wrong! :(";
             }
 
             document.getElementById(rslt).innerHTML = txt;
-            I_button.disabled = true;
+            document.getElementById(btn).disabled = true;
             totalQuestions++;
         } 
 
         function EndQuiz(){
-            
+            var score = correctAnswers/totalQuestions;
+            score *= 100;
+
+            document.getElementById("Final Result").innerHTML = "You got " + score.toString() + "%.";
+            .disabled = true;
         }
 
     </script>
@@ -32,79 +58,116 @@
 <body>
     <h1>ASL Quiz</h1>
     <form name="quizForm">
-    <div>
-        <h3> Question 1</h3>
-        <img src="ASL/asl_I.png"><br>
-        What letter is this sign? 
-        <input type='text' id='I_answer'>
-        <input type='button' id="I_button" value='check' \
-        onclick="CheckQuestion('I_answer','I_message','I', 'I_button')"><br>
-        <p class="message" id="I_message"></p>
+        <table style="width: 100%">
+            <tr>
+                <th><h3>Question 1</h3></th>
+                <th><h3>Question 2</h3></th>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <img src="ASL/asl_I.png"><br>
+                        What letter is this sign? 
+                        <input class='usr_answer' type='text' id='I_answer'>
+                        <input type='button' id="I_button" value='check' \
+                        onclick="CheckQuestion('I_answer','I_message','I', 'I_button')"><br>
+                        <p class="message" id="I_message"><b>Result</b>:</p>
 
-    </div>
-    <div>
-        <h3> Question 2</h3>
-        <img src=ASL/asl_R.png><br>
-        What letter is this sign? 
-        <input type='text' id='R_answer'>
-        <input type='button' value='check' \
-        onclick="CheckQuestion('R_answer','R_message','R')"><br>
-        <p class=message id="R_message"></p>
-    </div>
-    <div>
-        <h3> Question 3</h3>
-        <img src=ASL/asl_N.png><br>
-        What letter is this sign? 
-        <input type='text' id='N_answer'>
-        <input type='button' value='check' \
-        onclick="CheckQuestion('N_answer','N_message','N')"><br>
-        <p class=message id="N_message"> </p>
-    </div>
-    <div>
-        <h3> Question 4</h3>
-        <img src=ASL/asl_A.png><br>
-        What letter is this sign? 
-        <input type='text' id='A_answer'><input type='button' value='check' \
-        onclick="CheckQuestion('A_answer','A_message','A')"><br>
-        <p class=message id="A_message"></p>
-    </div>
-    <div>
-        <h3> Question 5</h3>
-        <img src=ASL/asl_X.png><br>
-        What letter is this sign? 
-        <input type='text' id='X_answer'>
-        <input type='button' value='check' \
-        onclick="CheckQuestion('X_answer','X_message','X')"><br>
-        <p class=message id="X_message"></p>
-    </div>
-    <div>
-        <h3> Question 6</h3>
-        <img src=ASL/asl_B.png><br>
-        What letter is this sign? 
-        <input type='text' id='B_answer'>
-        <input type='button' value='check' \
-        onclick="CheckQuestion('B_answer','B_message','B')"><br>
-        <p class=message id="B_message"></p>
-    </div>
-    <div>
-        <h3> Question 7</h3>
-        <img src=ASL/asl_P.png><br>
-        What letter is this sign? 
-        <input type='text' id='P_answer'>
-        <input type='button' value='check' \
-        onclick="CheckQuestion('P_answer','P_message','P')"><br>
-        <p class=message id="P_message"></p>
-    </div>
-    <div>
-        <h3> Question 8</h3>
-        <img src=ASL/asl_Y.png><br>
-        What letter is this sign? 
-        <input type='text' id='Y_answer'>
-        <input type='button' value='check' \
-        onclick="CheckQuestion('Y_answer','Y_message','Y')"><br>
-        <p class=message id="Y_message"></p>
-    </div>
-    <input type="button" value="Finish" onclick="EndQuiz()">
-    </form>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <img src=ASL/asl_R.png><br>
+                        What letter is this sign? 
+                        <input class='usr_answer' type='text' id='R_answer'>
+                        <input type='button' value='check' id='R_button' \
+                        onclick="CheckQuestion('R_answer','R_message','R', 'R_button')"><br>
+                        <p class=message id="R_message"><b>Result</b>:</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th><h3>Question 3</h3></th>
+                <th><h3>Question 4</h3></th>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <img src=ASL/asl_N.png><br>
+                        What letter is this sign? 
+                        <input class='usr_answer' type='text' id='N_answer'>
+                        <input type='button' value='check' id='N_button' \
+                        onclick="CheckQuestion('N_answer','N_message','N', 'N_button')"><br>
+                        <p class=message id="N_message"><b>Result</b>:</p>
+                    </div>
+
+                </td>
+                <td>
+                   <div>
+                    <img src=ASL/asl_A.png><br>
+                    What letter is this sign? 
+                    <input class='usr_answer' type='text' id='A_answer'>
+                    <input type='button' value='check' id='A_button' \
+                    onclick="CheckQuestion('A_answer','A_message','A','A_button')"><br>
+                    <p class=message id="A_message"><b>Result</b>:</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+         <th><h3>Question 5</h3></th>
+         <th><h3>Question 6</h3></th>
+     </tr>
+     <tr>
+        <td>
+            <div>
+                <img src=ASL/asl_X.png><br>
+                What letter is this sign? 
+                <input class='usr_answer' type='text' id='X_answer'>
+                <input type='button' value='check' id='X_button' \
+                onclick="CheckQuestion('X_answer','X_message','X', 'X_button')"><br>
+                <p class=message id="X_message"><b>Result</b>:</p>
+            </div>
+        </td>
+        <td>
+            <div>
+                <img src=ASL/asl_B.png><br>
+                What letter is this sign? 
+                <input class='usr_answer' type='text' id='B_answer'>
+                <input type='button' value='check' id="B_button" \
+                onclick="CheckQuestion('B_answer','B_message','B','B_button')"><br>
+                <p class=message id="B_message"><b>Result</b>:</p>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th><h3>Question 7</h3></th>
+        <th><h3>Question 8</h3></th>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <img src=ASL/asl_P.png><br>
+                What letter is this sign? 
+                <input class='usr_answer' type='text' id='P_answer'>
+                <input type='button' value='check' id='P_button'\
+                onclick="CheckQuestion('P_answer','P_message','P', 'P_button')"><br>
+                <p class=message id="P_message"><b>Result</b>:</p>
+            </div>
+        </td>
+        <td>
+            <div>
+                <img src=ASL/asl_Y.png><br>
+                What letter is this sign? 
+                <input class='usr_answer' type='text' id='Y_answer'>
+                <input type='button' id="Y_button" value='check' \
+                onclick="CheckQuestion('Y_answer','Y_message','Y', 'Y_button')"><br>
+                <p class=message id="Y_message"><b>Result</b>:</p>
+            </div>
+        </td>
+    </tr>
+</table>
+<input text-align="center" type="button" value="Finish" onclick="EndQuiz()">
+<p id="Final Result"></p>
+</form>
 </body>
 </html>
