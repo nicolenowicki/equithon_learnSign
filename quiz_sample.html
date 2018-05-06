@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> ASL Quiz</title>
+    <script type="text/javascript">
+        var questionNumber = document.getElementsByTagName("div").length;
+        var totalQuestions = 0
+        var correctAnswers = 0
+
+        function CheckQuestion(usr, rslt, ans) {
+            var x = document.getElementById(usr).value;
+            if (x.toUpperCase() == ans){
+                txt = "Your answer is correct! :)";
+                correctAnswers++;
+            }
+            else {
+                txt = "Your answer is wrong! :(";
+            }
+
+            document.getElementById(rslt).innerHTML = txt;
+            I_button.disabled = true;
+            totalQuestions++;
+        } 
+
+        function EndQuiz(){
+            
+        }
+
+    </script>
+
+</head>
+<body>
+    <h1>ASL Quiz</h1>
+    <form name="quizForm">
+    <div>
+        <h3> Question 1</h3>
+        <img src="ASL/asl_I.png"><br>
+        What letter is this sign? 
+        <input type='text' id='I_answer'>
+        <input type='button' id="I_button" value='check' \
+        onclick="CheckQuestion('I_answer','I_message','I', 'I_button')"><br>
+        <p class="message" id="I_message"></p>
+
+    </div>
+    <div>
+        <h3> Question 2</h3>
+        <img src=ASL/asl_R.png><br>
+        What letter is this sign? 
+        <input type='text' id='R_answer'>
+        <input type='button' value='check' \
+        onclick="CheckQuestion('R_answer','R_message','R')"><br>
+        <p class=message id="R_message"></p>
+    </div>
+    <div>
+        <h3> Question 3</h3>
+        <img src=ASL/asl_N.png><br>
+        What letter is this sign? 
+        <input type='text' id='N_answer'>
+        <input type='button' value='check' \
+        onclick="CheckQuestion('N_answer','N_message','N')"><br>
+        <p class=message id="N_message"> </p>
+    </div>
+    <div>
+        <h3> Question 4</h3>
+        <img src=ASL/asl_A.png><br>
+        What letter is this sign? 
+        <input type='text' id='A_answer'><input type='button' value='check' \
+        onclick="CheckQuestion('A_answer','A_message','A')"><br>
+        <p class=message id="A_message"></p>
+    </div>
+    <div>
+        <h3> Question 5</h3>
+        <img src=ASL/asl_X.png><br>
+        What letter is this sign? 
+        <input type='text' id='X_answer'>
+        <input type='button' value='check' \
+        onclick="CheckQuestion('X_answer','X_message','X')"><br>
+        <p class=message id="X_message"></p>
+    </div>
+    <div>
+        <h3> Question 6</h3>
+        <img src=ASL/asl_B.png><br>
+        What letter is this sign? 
+        <input type='text' id='B_answer'>
+        <input type='button' value='check' \
+        onclick="CheckQuestion('B_answer','B_message','B')"><br>
+        <p class=message id="B_message"></p>
+    </div>
+    <div>
+        <h3> Question 7</h3>
+        <img src=ASL/asl_P.png><br>
+        What letter is this sign? 
+        <input type='text' id='P_answer'>
+        <input type='button' value='check' \
+        onclick="CheckQuestion('P_answer','P_message','P')"><br>
+        <p class=message id="P_message"></p>
+    </div>
+    <div>
+        <h3> Question 8</h3>
+        <img src=ASL/asl_Y.png><br>
+        What letter is this sign? 
+        <input type='text' id='Y_answer'>
+        <input type='button' value='check' \
+        onclick="CheckQuestion('Y_answer','Y_message','Y')"><br>
+        <p class=message id="Y_message"></p>
+    </div>
+    <input type="button" value="Finish" onclick="EndQuiz()">
+    </form>
+</body>
+</html>
