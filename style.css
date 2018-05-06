@@ -1,0 +1,37 @@
+div#gameHeader {
+  width: 880px;
+  height: 70px;
+  padding: 10px;
+  margin: 0px auto;
+}
+
+div#title {
+  font-size: 50px;
+  float: left;
+  width: 600px;
+  height: 70px;
+}
+
+div#score {
+  width: 200px;
+  height: 70px;
+  margin: 10px;
+  font-size: 25px;
+  float: right;
+}
+
+div#board {
+	background: #228B22;
+	width: 880px;
+	height: 880px;
+	padding: 10px;
+	margin: 0px auto;
+}
+
+div#board > div {
+	width: 200px;
+	height: 200px;
+	background-image: url('Card.png');
+	float: left;
+	margin: 10px;
+}

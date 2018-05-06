@@ -1,121 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style type="text/css">
-  div#gameHeader {
-      width: 880px;
-      height: 70px;
-      padding: 10px;
-      margin: 0px auto;
-    }
-    div#title {
-      font-size: 50px;
-      float: left;
-      width: 600px;
-      height: 70px;
-    }
-    div#score {
-      width: 200px;
-      height: 70px;
-      margin: 10px;
-      font-size: 25px;
-      float: right;
-    }
-		div#board {
-			background: #228B22;
-			width: 880px;
-			height: 880px;
-			padding: 10px;
-			margin: 0px auto;
-		}
-		div#board > div {
-			width: 200px;
-			height: 200px;
-			background-image: url('Card.png');
-			float: left;
-			margin: 10px;
-		}
-	</style>
-
-  <script>
-    var cardValues = ['A', 'B', 'I', 'N', 'P', 'R', 'X', 'Y', 'a', 'b', 'i', 'n', 'p', 'r', 'x', 'y'];
-    // write function to randomize this
-    
-    var cardIds = [];
-    var cardsFlipped = [];
-
-    var flipped = 0; 
-    var totalMatches = 0;
-
-    function init(){
-      var output = '';
-      for(var i = 0; i < cardValues.length; i++){
-        output += '<div id="tile_'+i+'" onclick="flip(this,\''+cardValues[i]+'\', )"></div>';
-      }
-      document.getElementById('board').innerHTML = output;
-    }
-    
-    function flip(card, value) {
-      if (flipped < 2) {
-        if (value == value.toUpperCase()) {
-          var fileString = 'CardFacesLetters/letter_'+value.toUpperCase()+'.png'
-          card.style.backgroundImage = "url("+fileString+")";
-        } else {
-          var fileString = 'CardFaces/asl_'+value.toUpperCase()+'.png'
-          card.style.backgroundImage = "url("+fileString+")";
-        }
-          
-        cardsFlipped.push(value.toUpperCase());
-        cardIds.push(card.id);
-          
-        flipped += 1;
-          
-        if (flipped == 2) {
-          if (cardsFlipped[0] == cardsFlipped[1]) {              
-            totalMatches++;
-            document.getElementById("score").innerHTML = "Score: "+totalMatches;
-
-            cardsFlipped = [];
-            cardsIds = [];
-            flipped = 0;
-
-            if (totalMatches == 8) {
-              // gameover
-              totalMatches = 0;
-              document.getElementById("score").innerHTML = "Score: "+totalMatches;
-              document.getElementById("board").innerHTML = "";
-              init();
-            }
-
-          } else {
-            setTimeout(flipBack, 500);
-          }
-        }
-      }
-    }
-
-    function flipBack() {
-      var card1 = document.getElementById(cardIds[cardIds.length - 2]);
-      var card2 = document.getElementById(cardIds[cardIds.length - 1]);
-      // make slower
-      cardsFlipped = [];
-      cardsIds = [];
-      flipped = 0;
-      card1.style.backgroundImage = 'url(Card.png)';
-      card1.innerHTML = "";
-      card2.style.backgroundImage = 'url(Card.png)';
-      card2.innerHTML = "";
-    }
-    
-  </script>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="init()">
   <div id="gameHeader">
     <div id="title">ASL MATCH GAME</div>
     <div id="score">Score: 0</div>
   </div>
-
 	<div id="board"></div>
-	<script>init();</script>
+	<script src="js.js"></script>
 </body>
 </html>
