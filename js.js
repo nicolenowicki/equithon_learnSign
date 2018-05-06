@@ -1,40 +1,28 @@
 window.onload = init;
 
-var cardValues = ['A', 'B', 'I', 'N', 'P', 'R', 'X', 'Y', 'a', 'b', 'i', 'n', 'p', 'r', 'x', 'y'];
-    // write function to randomize this
+var cardValues = ['A', 'a', 'I', 'x', 'n', 'R', 'i', 'Y', 'B', 'b', 'X', 'P', 'p', 'r', 'N', 'y'];
+// write function to randomize this
     
 var cardIds = [];
 var cardsFlipped = [];
+var matches = [];
 
 var flipped = 0; 
 var totalMatches = 0;
-var matches = [];
-
-// get the mPopup
-var mpopup = document.getElementById('mpopupBox');
-
-// get the close action element
-var close = document.getElementsByClassName("close")[0];
-
-// close the mPopup once close element is clicked
-close.onclick = function() {
-    mpopup.style.display = "none";
-}
 
 function init(){
-  totalMatches = 0;
-  document.getElementById("score").innerHTML = "Score: "+totalMatches;
-  document.getElementById("board").innerHTML = "";
-  
-  var output = '';
+  resetBoard();
+
+  var boardCards = '';
   for(var i = 0; i < cardValues.length; i++){
-    output += '<div id="tile_'+i+'" onclick="flip(this,\''+cardValues[i]+'\', )"></div>';
+    boardCards += '<div id="tile_'+i+'" onclick="flip(this,\''+cardValues[i]+'\', )"></div>';
   }
-  document.getElementById('board').innerHTML = output;
+  document.getElementById('board').innerHTML = boardCards;
 }
 
 function flip(card, value) {
   if (flipped < 2 && !matches.includes(value)) {
+
     if (value == value.toUpperCase()) {
       var fileString = 'CardFacesLetters/letter_'+value.toUpperCase()+'.png'
       card.style.backgroundImage = "url("+fileString+")";
@@ -59,14 +47,10 @@ function flip(card, value) {
         flipped = 0;
 
         if (totalMatches == 8) {
-          
-          mpopup.style.display = "block";
-          //init();
+          endGame();
         }
 
       } else {
-        matches.pop();
-        matches.pop();
         setTimeout(flipBack, 500);
       }
     }
@@ -76,12 +60,30 @@ function flip(card, value) {
 function flipBack() {
   var card1 = document.getElementById(cardIds[cardIds.length - 2]);
   var card2 = document.getElementById(cardIds[cardIds.length - 1]);
-  // make slower
+
+  matches.pop();
+  matches.pop();
+
   cardsFlipped = [];
   cardsIds = [];
   flipped = 0;
+
   card1.style.backgroundImage = 'url(Card.png)';
-  card1.innerHTML = "";
   card2.style.backgroundImage = 'url(Card.png)';
-  card2.innerHTML = "";
+}
+
+function endGame() {
+  alert("Congrats! You've matched all the values! You are ready to take the quiz!");
+}
+
+function resetBoard() {
+  var cardIds = [];
+  var cardsFlipped = [];
+  var matches = [];
+
+  var flipped = 0; 
+  var totalMatches = 0;
+  
+  document.getElementById("score").innerHTML = "Score: "+totalMatches;
+  document.getElementById("board").innerHTML = "";
 }
