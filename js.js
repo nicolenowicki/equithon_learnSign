@@ -10,7 +10,22 @@ var flipped = 0;
 var totalMatches = 0;
 var matches = [];
 
+// get the mPopup
+var mpopup = document.getElementById('mpopupBox');
+
+// get the close action element
+var close = document.getElementsByClassName("close")[0];
+
+// close the mPopup once close element is clicked
+close.onclick = function() {
+    mpopup.style.display = "none";
+}
+
 function init(){
+  totalMatches = 0;
+  document.getElementById("score").innerHTML = "Score: "+totalMatches;
+  document.getElementById("board").innerHTML = "";
+  
   var output = '';
   for(var i = 0; i < cardValues.length; i++){
     output += '<div id="tile_'+i+'" onclick="flip(this,\''+cardValues[i]+'\', )"></div>';
@@ -44,12 +59,8 @@ function flip(card, value) {
         flipped = 0;
 
         if (totalMatches == 8) {
-          // gameover
-          totalMatches = 0;
-          document.getElementById("score").innerHTML = "Score: "+totalMatches;
-          document.getElementById("board").innerHTML = "";
           
-          modal.style.display = "block";
+          mpopup.style.display = "block";
           //init();
         }
 
